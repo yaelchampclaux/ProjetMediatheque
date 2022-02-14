@@ -1,0 +1,45 @@
+version: '3.8'
+networks: 
+  dev:
+services:
+#Base de données
+  db:
+    image: mysql:8.0
+    container_name: db-mediatheque
+    networks:
+      - dev
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mediathequeroot
+      MYSQL_DATABASE: mediatheque
+#Phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-mediatheque
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8812:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD:mediathequeroot
+    networks:
+      - dev
+#PHP
+  www:
+    user: you
+    build: ./php
+    container_name: php-mediatheque
+    networks:
+      - dev
+    volumes:
+      - ./site:/home/you/site
+    ports:
+      - 8811:8800
+    environment:
+      SHELL_VERBOSITY: DEBUG
