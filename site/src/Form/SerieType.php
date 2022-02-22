@@ -15,7 +15,6 @@ class SerieType extends AbstractType
             ->add('titre')
             ->add('nbtomes')
             ->add('info')
-            ->add('oeuvres')
         ;
     }
 

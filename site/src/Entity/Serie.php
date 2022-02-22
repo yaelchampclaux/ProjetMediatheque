@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SerieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,19 +25,24 @@ class Serie
     private $titre;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbtomes;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $info;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Oeuvre::class, inversedBy="serie")
+     * @ORM\OneToMany(targetEntity=Oeuvre::class, mappedBy="serie")
      */
     private $oeuvres;
+
+    public function __construct()
+    {
+        $this->oeuvres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,7 +66,7 @@ class Serie
         return $this->nbtomes;
     }
 
-    public function setNbtomes(int $nbtomes): self
+    public function setNbtomes(?int $nbtomes): self
     {
         $this->nbtomes = $nbtomes;
 
@@ -71,21 +78,39 @@ class Serie
         return $this->info;
     }
 
-    public function setInfo(string $info): self
+    public function setInfo(?string $info): self
     {
         $this->info = $info;
 
         return $this;
     }
 
-    public function getOeuvres(): ?Oeuvre
+    /**
+     * @return Collection<int, Oeuvre>
+     */
+    public function getOeuvres(): Collection
     {
         return $this->oeuvres;
     }
 
-    public function setOeuvres(?Oeuvre $oeuvres): self
+    public function addOeuvre(Oeuvre $oeuvre): self
     {
-        $this->oeuvres = $oeuvres;
+        if (!$this->oeuvres->contains($oeuvre)) {
+            $this->oeuvres[] = $oeuvre;
+            $oeuvre->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOeuvre(Oeuvre $oeuvre): self
+    {
+        if ($this->oeuvres->removeElement($oeuvre)) {
+            // set the owning side to null (unless already changed)
+            if ($oeuvre->getSerie() === $this) {
+                $oeuvre->setSerie(null);
+            }
+        }
 
         return $this;
     }

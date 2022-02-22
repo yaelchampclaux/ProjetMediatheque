@@ -13,7 +13,6 @@ class TypeAuteurType extends AbstractType
     {
         $builder
             ->add('type')
-            ->add('auteurs')
         ;
     }
 

@@ -86,7 +86,7 @@ class Edition
     }
 
     /**
-     * @return Collection|Oeuvre[]
+     * @return Collection<int, Oeuvre>
      */
     public function getOeuvres(): Collection
     {

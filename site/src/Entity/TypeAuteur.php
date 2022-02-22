@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TypeAuteurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,9 +25,14 @@ class TypeAuteur
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Auteur::class, inversedBy="type")
+     * @ORM\OneToMany(targetEntity=Auteur::class, mappedBy="type")
      */
     private $auteurs;
+
+    public function __construct()
+    {
+        $this->auteurs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,14 +51,32 @@ class TypeAuteur
         return $this;
     }
 
-    public function getAuteurs(): ?Auteur
+    /**
+     * @return Collection<int, Auteur>
+     */
+    public function getAuteurs(): Collection
     {
         return $this->auteurs;
     }
 
-    public function setAuteurs(?Auteur $auteurs): self
+    public function addAuteur(Auteur $auteur): self
     {
-        $this->auteurs = $auteurs;
+        if (!$this->auteurs->contains($auteur)) {
+            $this->auteurs[] = $auteur;
+            $auteur->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuteur(Auteur $auteur): self
+    {
+        if ($this->auteurs->removeElement($auteur)) {
+            // set the owning side to null (unless already changed)
+            if ($auteur->getType() === $this) {
+                $auteur->setType(null);
+            }
+        }
 
         return $this;
     }

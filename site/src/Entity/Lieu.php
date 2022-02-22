@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LieuRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,9 +35,14 @@ class Lieu
     private $longitude;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Oeuvre::class, inversedBy="lieu")
+     * @ORM\OneToMany(targetEntity=Oeuvre::class, mappedBy="lieu")
      */
     private $oeuvres;
+
+    public function __construct()
+    {
+        $this->oeuvres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,14 +85,32 @@ class Lieu
         return $this;
     }
 
-    public function getOeuvres(): ?Oeuvre
+    /**
+     * @return Collection<int, Oeuvre>
+     */
+    public function getOeuvres(): Collection
     {
         return $this->oeuvres;
     }
 
-    public function setOeuvres(?Oeuvre $oeuvres): self
+    public function addOeuvre(Oeuvre $oeuvre): self
     {
-        $this->oeuvres = $oeuvres;
+        if (!$this->oeuvres->contains($oeuvre)) {
+            $this->oeuvres[] = $oeuvre;
+            $oeuvre->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOeuvre(Oeuvre $oeuvre): self
+    {
+        if ($this->oeuvres->removeElement($oeuvre)) {
+            // set the owning side to null (unless already changed)
+            if ($oeuvre->getLieu() === $this) {
+                $oeuvre->setLieu(null);
+            }
+        }
 
         return $this;
     }

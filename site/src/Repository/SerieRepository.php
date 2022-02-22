@@ -7,10 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Collection|null find($id, $lockMode = null, $lockVersion = null)
- * @method Collection|null findOneBy(array $criteria, array $orderBy = null)
- * @method Collection[]    findAll()
- * @method Collection[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Serie|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Serie|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Serie[]    findAll()
+ * @method Serie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class SerieRepository extends ServiceEntityRepository
 {
@@ -20,15 +20,15 @@ class SerieRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Collection[] Returns an array of Collection objects
+    //  * @return Serie[] Returns an array of Serie objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
+            ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -37,10 +37,10 @@ class SerieRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Collection
+    public function findOneBySomeField($value): ?Serie
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

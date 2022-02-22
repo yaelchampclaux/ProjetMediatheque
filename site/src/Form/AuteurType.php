@@ -14,6 +14,7 @@ class AuteurType extends AbstractType
         $builder
             ->add('nomoupseudo')
             ->add('prenom')
+            ->add('type')
             ->add('oeuvres')
         ;
     }

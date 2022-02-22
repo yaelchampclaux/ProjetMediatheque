@@ -45,12 +45,12 @@ class Oeuvre
     private $editions;
 
     /**
-     * @ORM\OneToMany(targetEntity=Serie::class, mappedBy="oeuvres")
+     * @ORM\ManyToOne(targetEntity=Serie::class, inversedBy="oeuvres")
      */
     private $serie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="oeuvres")
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="oeuvres")
      */
     private $lieu;
 
@@ -58,8 +58,6 @@ class Oeuvre
     {
         $this->auteurs = new ArrayCollection();
         $this->editions = new ArrayCollection();
-        $this->serie = new ArrayCollection();
-        $this->lieu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -104,7 +102,7 @@ class Oeuvre
     }
 
     /**
-     * @return Collection|Auteur[]
+     * @return Collection<int, Auteur>
      */
     public function getAuteurs(): Collection
     {
@@ -128,7 +126,7 @@ class Oeuvre
     }
 
     /**
-     * @return Collection|Edition[]
+     * @return Collection<int, Edition>
      */
     public function getEditions(): Collection
     {
@@ -151,62 +149,26 @@ class Oeuvre
         return $this;
     }
 
-    /**
-     * @return Collection|Collection[]
-     */
-    public function getSerie(): Collection
+    public function getSerie(): ?Serie
     {
-        return $this->collection;
+        return $this->serie;
     }
 
-    public function addSerie(Collection $collection): self
+    public function setSerie(?Serie $serie): self
     {
-        if (!$this->collection->contains($collection)) {
-            $this->collection[] = $collection;
-            $collection->setOeuvres($this);
-        }
+        $this->serie = $serie;
 
         return $this;
     }
 
-    public function removeSerie(Collection $collection): self
-    {
-        if ($this->collection->removeElement($collection)) {
-            // set the owning side to null (unless already changed)
-            if ($collection->getOeuvres() === $this) {
-                $collection->setOeuvres(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Lieu[]
-     */
-    public function getLieu(): Collection
+    public function getLieu(): ?Lieu
     {
         return $this->lieu;
     }
 
-    public function addLieu(Lieu $lieu): self
+    public function setLieu(?Lieu $lieu): self
     {
-        if (!$this->lieu->contains($lieu)) {
-            $this->lieu[] = $lieu;
-            $lieu->setOeuvres($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLieu(Lieu $lieu): self
-    {
-        if ($this->lieu->removeElement($lieu)) {
-            // set the owning side to null (unless already changed)
-            if ($lieu->getOeuvres() === $this) {
-                $lieu->setOeuvres(null);
-            }
-        }
+        $this->lieu = $lieu;
 
         return $this;
     }

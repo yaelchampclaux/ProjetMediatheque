@@ -13,11 +13,22 @@ docker-compose -f docker-compose_x86.yml up --build
 #2. Accéder au shell du conteneur PHP
 docker exec –it php-mediatheque /bin/bash
 
-#3. Récupérer la dernière migration de la base de données (se place dans site) Exemple de réponse DoctrineMigrations\Version20220211020200
-php bin/console doctrine:migrations:latest
+#3. Installer les vendors symfony (dans site)
+../composer.phar install
 
-#4. Faire la migration 
-doctrine:migrations:migrate Version20220211020200
+#4 Installer la base de données (faire une migration doctrine)
+php bin/console doctrine:migrations:migrate
+
+#5 Tester que ça fonctionne
+#Accés au site
+http://localhost:8811/
+#Accés à PhpMyAdmin
+http://localhost:8812/
+
+## Autres commandes utiles
+
+#Récupérer la dernière migration de la base de données (se place dans site) Exemple de réponse DoctrineMigrations\Version20220211020200
+php bin/console doctrine:migrations:latest
 
 #Commande pour accéder au shell du conteneur MySQL
 docker exec –it db-mediatheque /bin/bash

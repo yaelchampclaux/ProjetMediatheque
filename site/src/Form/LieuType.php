@@ -15,7 +15,6 @@ class LieuType extends AbstractType
             ->add('adresse')
             ->add('latitude')
             ->add('longitude')
-            ->add('oeuvres')
         ;
     }
 

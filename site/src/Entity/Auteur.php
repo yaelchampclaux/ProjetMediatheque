@@ -30,7 +30,7 @@ class Auteur
     private $prenom;
 
     /**
-     * @ORM\OneToMany(targetEntity=TypeAuteur::class, mappedBy="auteurs")
+     * @ORM\ManyToOne(targetEntity=TypeAuteur::class, inversedBy="auteurs")
      */
     private $type;
 
@@ -41,7 +41,6 @@ class Auteur
 
     public function __construct()
     {
-        $this->type = new ArrayCollection();
         $this->oeuvres = new ArrayCollection();
     }
 
@@ -74,38 +73,20 @@ class Auteur
         return $this;
     }
 
-    /**
-     * @return Collection|TypeAuteur[]
-     */
-    public function getType(): Collection
+    public function getType(): ?TypeAuteur
     {
         return $this->type;
     }
 
-    public function addType(TypeAuteur $type): self
+    public function setType(?TypeAuteur $type): self
     {
-        if (!$this->type->contains($type)) {
-            $this->type[] = $type;
-            $type->setAuteurs($this);
-        }
-
-        return $this;
-    }
-
-    public function removeType(TypeAuteur $type): self
-    {
-        if ($this->type->removeElement($type)) {
-            // set the owning side to null (unless already changed)
-            if ($type->getAuteurs() === $this) {
-                $type->setAuteurs(null);
-            }
-        }
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * @return Collection|Oeuvre[]
+     * @return Collection<int, Oeuvre>
      */
     public function getOeuvres(): Collection
     {
