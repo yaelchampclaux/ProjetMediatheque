@@ -33,8 +33,3 @@ php bin/console doctrine:migrations:latest
 #Commande pour accéder au shell du conteneur MySQL
 docker exec –it db-mediatheque /bin/bash
 
-#Accés au site
-http://localhost:8811/
-
-#Accés à PhpMyAdmin
-http://localhost:8812/
