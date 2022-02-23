@@ -44,6 +44,11 @@ class Lieu
         $this->oeuvres = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->adresse;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

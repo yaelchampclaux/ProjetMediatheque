@@ -54,10 +54,20 @@ class Oeuvre
      */
     private $lieu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeOeuvre::class, inversedBy="oeuvres")
+     */
+    private $type;
+
     public function __construct()
     {
         $this->auteurs = new ArrayCollection();
         $this->editions = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->titre;
     }
 
     public function getId(): ?int
@@ -169,6 +179,18 @@ class Oeuvre
     public function setLieu(?Lieu $lieu): self
     {
         $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getType(): ?TypeOeuvre
+    {
+        return $this->type;
+    }
+
+    public function setType(?TypeOeuvre $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

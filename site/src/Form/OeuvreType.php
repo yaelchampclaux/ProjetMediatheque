@@ -19,6 +19,7 @@ class OeuvreType extends AbstractType
             ->add('editions')
             ->add('serie')
             ->add('lieu')
+            ->add('type')
         ;
     }
 

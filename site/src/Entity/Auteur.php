@@ -44,6 +44,11 @@ class Auteur
         $this->oeuvres = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (($this->prenom == '')||($this->prenom == NULL)) ? $this->nomoupseudo : $this->nomoupseudo . ' ' . $this->prenom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
