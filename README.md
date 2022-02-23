@@ -7,24 +7,24 @@ Avoir installé docker et docker-compose
 # Pre-requis Windows
 Awoir installer Linux WSL et DockerDesktop
 
-#Lancer l'environnement de développement
+# Lancer l'environnement de développement
 
-##1. lancer l'environnement (se placer dans le projet):
+## 1. lancer l'environnement (se placer dans le projet):
 docker-compose -f docker-compose_x86.yml up --build
 
-##2. Accéder au shell du conteneur PHP
+## 2. Accéder au shell du conteneur PHP
 docker exec –it php-mediatheque /bin/bash
 
-##3. Installer les vendors symfony (depuis /site)
+## 3. Installer les vendors symfony (depuis /site)
 ../composer.phar install
 
-##4. Créer la base de données en synchronisant 
+## 4. Créer la base de données en synchronisant 
 php bin/console doctrine:schema:update --force
 
-##5. Ajouter éventuellement des données dans la médiathèque (par PhpMyAdmin) 
+## 5. Ajouter éventuellement des données dans la médiathèque (par PhpMyAdmin) 
 importer le fichier fill-mediatheque.sql qui se trouve dans le dossier /data
 
-##6. Tester
+## 6. Tester
 
 ### Accés au site
 http://localhost:8811/
