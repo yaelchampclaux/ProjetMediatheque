@@ -9,16 +9,19 @@ Awoir installer Linux WSL et DockerDesktop
 
 # Lancer l'environnement de développement
 
-1. lancer l'environnement (se placer dans le projet):
+1. lancer l'environnement (se placer dans le dossier ProjetMediatheque):
 docker-compose -f docker-compose_x86.yml up --build
 
-2. Accéder au shell du conteneur PHP
+Attention à ne pas fermer la fenêtre dans laquelle s'exécutent les conatiners
+Si vous avez le message somposer-setup illisible, il faut changer les sauts de ligne (CRLF) en saut de ligne Unix (LF)
+
+2. Accéder au shell du conteneur PHP dans une autre fenêtre de commande
 docker exec –it php-mediatheque /bin/bash
 
-3. Installer les vendors symfony (depuis /site)
+3. Installer les vendors symfony (depuis /site dans le container php)
 ../composer.phar install
 
-4. Créer la base de données en synchronisant 
+4. Créer la base de données en synchronisant (depuis /site dans le container php) 
 php bin/console doctrine:schema:update --force
 
 5. Ajouter éventuellement des données dans la médiathèque (par PhpMyAdmin) 
