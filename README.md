@@ -29,15 +29,18 @@ Attention à ne pas fermer la fenêtre dans laquelle s'exécutent les conatiners
 Ovrir une autre fenêtre pour taper les commandes suivantes
 
 2. Accéder au shell du conteneur PHP (dans une autre fenêtre de commande que celle où sont lancés les containers)
+
 docker exec –it php-mediatheque /bin/bash
 
 3. Installer les vendors symfony (depuis /site dans le container php)
+
 ../composer.phar install
 
 Cela charge les dépendences décrites dans notre fichier composer.json. 
 En effet elles ne sont pas dans le dépôt git car elle peuvent être générées avec la commande précédente
 
 4. Créer la base de données en synchronisant (depuis /site dans le container php) 
+
 php bin/console doctrine:schema:update --force
 
 Cela permet de générer la base de donnés dans MySQL à partir de notre code (les Entity dans le dossier /src de notre site)
@@ -58,49 +61,64 @@ Puis cliquer sur Importer puis parcourir, puis sélectionner le fichier fill-med
 ## Symfony
 
 ### Lister les commandes disponibles de la console Symfony
+
 php bin/console list
 
 ### Récupérer la dernière migration de la base de données (se place dans site) 
+
 php bin/console doctrine:migrations:latest
 > Exemple de réponse DoctrineMigrations\Version20220211020200
 
 ### Réaliser la migration
+
 php bin/console doctrine:migrations:migrate
 
 ### Réaliser une migration spécifique
+
 php bin/console doctrine:migrations:migrate DoctrineMigrations\Version20220211020200
 
 ### Voir les routes du site
+
 php bin/console debug:router
 
 ### Vider les caches 
+
 php bin/console cache:clear
 
 ### Installer les assets (images, css, javascript) dans le dossier public
+
 php bin/console assets:install
 
 ## Docker 
 
 ### Commande pour accéder au shell du conteneur MySQL
+
 docker exec –it db-mediatheque /bin/bash
 
 ### Pour connaitre les processus running et exited
+
 docker ps –a
 
 ### Pour stopper un container running (celui s’étei#nt proprement)
+
 docker stop *container_id ou container_name*
 
 ### Pour stopper un container running immédiatement
+
 docker kill *container_id ou container_name*
 
 ### Pour effacer un container stoppé
+
 docker rm *container_id ou container_name*
 
 ### Restart un ou plusieurs containers
+
 docker restart *container_id1 container_id2 ... ou container_name1 ...*
 
 ### Stat d'utilisation
+
 docker stat
 
-### Verification de failles
+### Vérification de failles
+
 docker scan
