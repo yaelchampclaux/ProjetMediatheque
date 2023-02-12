@@ -5,7 +5,7 @@ Teach about dev and web environment, Symfony, Doctrine, Twig on a pratical examp
 Avoir installé docker et docker-compose
 
 # Pre-requis Windows
-Awoir installer Linux WSL2 et DockerDesktop
+Avoir installer Linux WSL2 et DockerDesktop
 (*) Quand vous lancez l'environnement depuis une fenêtre de commande Windows (cmd) ou une fenêtre Powershell 
 Si vous avez le message composer-setup.php illisible lors du lancement des container (commande 1. ci-après)
 C'est que windows ne fait pas la conversion entre fichier Unix et fichier Windows.
