@@ -58,13 +58,15 @@ Puis cliquer sur Importer puis parcourir, puis sélectionner le fichier fill-med
 
 # Autres commandes utiles
 
-## Symfony
+## Symfony 
+
+Pour les commandes suivantes, on considère que l'on est placé dans le dossier /site du container php-mediatheque 
 
 ### Lister les commandes disponibles de la console Symfony
 
 php bin/console list
 
-### Récupérer la dernière migration de la base de données (se place dans site) 
+### Récupérer la dernière migration de la base de données
 
 php bin/console doctrine:migrations:latest
 > Exemple de réponse DoctrineMigrations\Version20220211020200
