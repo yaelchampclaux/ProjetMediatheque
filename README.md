@@ -19,9 +19,10 @@ Taper les commandes plutôt que les copier-coller. En effet, lors de la copie de
 Windows remplace le tiret de la commande (tiret du 6) par un tiret long ce qui provoque le message "Error: No such container: –it" 
 Il suffit de remplacer le tiret par le tiret du 6 et relancer la commande
 
-# Lancer l'environnement de développement dans WSL2 ou à partir de Git Bash ou dans un Linux ou à partir d'une fenêtre de commande Wnndows(*)
+# Lancer l'environnement de développement dans WSL2 ou à partir de Git Bash ou dans un Linux ou à partir d'une fenêtre de commande Windows(*)
 
-1. lancer l'environnement (se placer dans le dossier ProjetMediatheque de manière à voir le fichier docker-compose_x86.yml):
+1. lancer l'environnement (se placer dans le dossier ProjetMediatheque de manière à voir le fichier docker-compose_x86.yml)
+
 docker-compose -f docker-compose_x86.yml up --build
 
 Attention à ne pas fermer la fenêtre dans laquelle s'exécutent les conatiners !!! 
