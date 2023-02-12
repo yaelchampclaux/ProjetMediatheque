@@ -6,10 +6,11 @@ Avoir installé docker et docker-compose
 
 # Pre-requis Windows
 Avoir installer Linux WSL2 et DockerDesktop
+
 (*) Quand vous lancez l'environnement depuis une fenêtre de commande Windows (cmd) ou une fenêtre Powershell 
 Si vous avez le message composer-setup.php illisible lors du lancement des container (commande 1. ci-après)
 C'est que windows ne fait pas la conversion entre fichier Unix et fichier Windows.
-il faut changer les sauts de ligne (CRLF) en saut de ligne Unix (LF) du fichier composer-setup.php dans le dossier /php
+il faut changer les sauts de ligne Unix (LF) en sauts de ligne Windows (CRLF) du fichier composer-setup.php dans le dossier /php
 Pour cela ouvrir composer-setup.php avec notepad++ aller dans Edition / Convertir les sauts de lignes / Covertir au format Windows (CR + LF)
 Puis relancer la commande de lancement de l'environnement
 
