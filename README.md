@@ -7,16 +7,17 @@ Avoir installé docker et docker-compose
 # Pre-requis Windows
 Avoir installer Linux WSL2 et DockerDesktop
 
-(*) Quand vous lancez l'environnement depuis une fenêtre de commande Windows (cmd) ou une fenêtre Powershell 
-Si vous avez le message composer-setup.php illisible lors du lancement des container (commande 1. ci-après)
-C'est que windows ne fait pas la conversion entre fichier Unix et fichier Windows.
-il faut changer les sauts de ligne Unix (LF) en sauts de ligne Windows (CRLF) du fichier composer-setup.php dans le dossier /php
-Pour cela ouvrir composer-setup.php avec notepad++ aller dans Edition / Convertir les sauts de lignes / Covertir au format Windows (CR + LF)
+(*) Quand vous lancez l'environnement depuis une fenêtre de commande Windows (cmd) ou une fenêtre Powershell\ 
+Vous pouvez rencontrer le message composer-setup.php illisible lors du lancement des container (commande 1. ci-après)\
+C'est que windows ne fait pas la conversion entre fichier Unix et fichier Windows.\
+Il faut changer les sauts de ligne Unix (LF) en sauts de ligne Windows (CRLF) du fichier composer-setup.php dans le dossier /php\
+Pour cela ouvrir composer-setup.php avec notepad++ aller dans Edition / Convertir les sauts de lignes / Covertir au format Windows (CR + LF)\
 Puis relancer la commande de lancement de l'environnement
 
 # Conseils 
-Taper les commandes plutôt que les copier-coller. En effet, lors de la copie de "docker exec –it php-mediatheque /bin/bash" (commande 2. ci-après),
-Windows remplace le tiret de la commande (tiret du 6) par un tiret long ce qui provoque le message "Error: No such container: –it" 
+Taper les commandes plutôt que les copier-coller.\
+En effet, lors de la copie de "docker exec –it php-mediatheque /bin/bash" (commande 2. ci-après),\
+Windows remplace le tiret de la commande (tiret du 6) par un tiret long ce qui provoque le message "Error: No such container: –it" \
 Il suffit de remplacer le tiret par le tiret du 6 et relancer la commande
 
 # Lancer l'environnement de développement dans WSL2 ou à partir de Git Bash ou dans un Linux ou à partir d'une fenêtre de commande Windows(*)
@@ -26,7 +27,7 @@ Il suffit de remplacer le tiret par le tiret du 6 et relancer la commande
 docker-compose -f docker-compose_x86.yml up --build
 
 Attention à ne pas fermer la fenêtre dans laquelle s'exécutent les conatiners !!! 
-Ovrir une autre fenêtre pour taper les commandes suivantes
+Ouvrir une autre fenêtre pour taper les commandes suivantes
 
 2. Accéder au shell du conteneur PHP (dans une autre fenêtre de commande que celle où sont lancés les containers)
 
@@ -101,7 +102,7 @@ docker exec –it db-mediatheque /bin/bash
 
 docker ps –a
 
-### Pour stopper un container running (celui s’étei#nt proprement)
+### Pour stopper un container running (celui s’éteint proprement)
 
 docker stop *container_id ou container_name*
 
