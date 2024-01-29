@@ -43,7 +43,7 @@ Open another window to type the following commands
 
 1. Access the PHP container shell (in a command window other than the one in which the containers are launched)
 
-docker exec -it php-mediatheque /bin/bash
+``docker exec -it php-mediatheque /bin/bash``
 
 2. Install symfony vendors
 
