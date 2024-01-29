@@ -1,127 +1,140 @@
 # ProjetMediatheque
-Teach about dev and web environment, Symfony, Doctrine, Twig on a pratical example of building a small mediatheque
+Computer engineering project for Master2 IIN at Université Jean Jaures. 
+Support for the discovery of Docker, Symfony (Doctrine, Twig), Git. 
 
-# Pre-requis Linux
-Avoir installé docker et docker-compose
+# Linux & Mac prerequisites
+Docker and docker-compose installed.
 
-# Pre-requis Windows
-Avoir installer Linux WSL2 et DockerDesktop
+# Windows prerequisites
+Linux WSL2 and DockerDesktop installed.
 
-(*) Quand vous lancez l'environnement depuis une fenêtre de commande Windows (cmd) ou une fenêtre Powershell\ 
-Vous pouvez rencontrer le message composer-setup.php illisible lors du lancement des container (commande 1. ci-après)\
-C'est que windows ne fait pas la conversion entre fichier Unix et fichier Windows.\
-Il faut changer les sauts de ligne Unix (LF) en sauts de ligne Windows (CRLF) du fichier composer-setup.php dans le dossier /php\
-Pour cela ouvrir composer-setup.php avec notepad++ aller dans Edition / Convertir les sauts de lignes / Covertir au format Windows (CR + LF)\
-Puis relancer la commande de lancement de l'environnement
+# Usage
 
-# Conseils 
-Taper les commandes plutôt que les copier-coller.\
-En effet, lors de la copie de "docker exec –it php-mediatheque /bin/bash" (commande 2. ci-après),\
-Windows remplace le tiret de la commande (tiret du 6) par un tiret long ce qui provoque le message "Error: No such container: –it" \
-Il suffit de remplacer le tiret par le tiret du 6 et relancer la commande
+## WSL, Linux, MAC users
+This tp is designed to run in WSL (or linux or mac).
 
-# Lancer l'environnement de développement dans WSL2 ou à partir de Git Bash ou dans un Linux ou à partir d'une fenêtre de commande Windows(*)
+## Windows users (cmd, powershell)
+It can also be launched from a Windows command window (cmd) or a Powershell window.
+To do this (before running command 1. below), replace the Unix linefeeds (LF) with Windows linefeeds (CRLF) in the composer-setup.php file in the /php\ folder.
+This can be done with notepad++ via Edit / Convert line breaks / Covertir to Windows format (CR + LF), without forgetting to save the file.
 
-1. lancer l'environnement (se placer dans le dossier ProjetMediatheque de manière à voir le fichier docker-compose_x86.yml)
+This avoids the error "=> ERROR [www 7/9] RUN php composer-setup.php" when launching containers.
 
-docker-compose -f docker-compose_x86.yml up --build
+Another well-known error is "Error: No such container: -it"
+When pasting the command "docker exec -it php-mediatheque /bin/bash" (command 2. below),\
+Windows replaces the dash in the command (dash 6) with a long dash, which causes the error message
+Solution: Type commands rather than copy and paste them.
 
-Attention à ne pas fermer la fenêtre dans laquelle s'exécutent les conatiners !!! 
-Ouvrir une autre fenêtre pour taper les commandes suivantes
+# Clone the project
 
-2. Accéder au shell du conteneur PHP (dans une autre fenêtre de commande que celle où sont lancés les containers)
+``git clone https://github.com/yaelchampclaux/ProjetMediatheque.git``
 
-docker exec –it php-mediatheque /bin/bash
+This creates a "ProjetMediatheque" folder.
 
-3. Installer les vendors symfony (depuis /site dans le container php)
+# Launch the development environment 
 
-../composer.phar install
+``cd ProjetMediatheque``\
+``docker-compose -f docker-compose_x86.yml up --build``
 
-Cela charge les dépendences décrites dans notre fichier composer.json. 
-En effet elles ne sont pas dans le dépôt git car elle peuvent être générées avec la commande précédente
+Be careful not to close the window in which the conatiners are running! 
+Open another window to type the following commands
 
-4. Créer la base de données en synchronisant (depuis /site dans le container php) 
+# Use the environment
+
+1. Access the PHP container shell (in a command window other than the one in which the containers are launched)
+
+docker exec -it php-mediatheque /bin/bash
+
+2. Install symfony vendors
+
+``cd site``\
+``../composer.phar install``
+
+This loads the dependencies described in our composer.json file. 
+They are not in the git repository, as they can be generated with the previous command.
+
+3. Create the database by synchronizing (from /site in the php container) 
 
 php bin/console doctrine:schema:update --force
 
-Cela permet de générer la base de donnés dans MySQL à partir de notre code (les Entity dans le dossier /src de notre site)
+This generates the database in MySQL from our code (the Entity in the /src folder of our site).
 
-5. Ajouter les données dans la médiathèque (par PhpMyAdmin) 
+4. Add data to the media library (via PhpMyAdmin) 
 
-Avec votre navigateur aller dans phpMyAdmin http://localhost:8812/
-Puis cliquer sur Importer puis parcourir, puis sélectionner le fichier fill-mediatheque.sql qui se trouve dans le dossier /data du ProjetMediatheque
+Using your browser, go to phpMyAdmin http://localhost:8812/
+Then click on Import then Browse, then select the fill-mediatheque.sql file located in the /data folder of ProjetMediatheque.
 
-6. Tester
+5. Test
 
-    - Accés au site http://localhost:8811/
+    - Mediatheque website : http://localhost:8811/
 
-    - Accés à PhpMyAdmin http://localhost:8812/
+    - PhpMyAdmin http://localhost:8812/
 
-# Autres commandes utiles
-
-## Symfony 
-
-Pour les commandes suivantes, on considère que l'on est placé dans le dossier /site du container php-mediatheque 
-
-### Lister les commandes disponibles de la console Symfony
-
-php bin/console list
-
-### Récupérer la dernière migration de la base de données
-
-php bin/console doctrine:migrations:latest
-> Exemple de réponse DoctrineMigrations\Version20220211020200
-
-### Réaliser la migration
-
-php bin/console doctrine:migrations:migrate
-
-### Réaliser une migration spécifique
-
-php bin/console doctrine:migrations:migrate DoctrineMigrations\Version20220211020200
-
-### Voir les routes du site
-
-php bin/console debug:router
-
-### Vider les caches 
-
-php bin/console cache:clear
-
-### Installer les assets (images, css, javascript) dans le dossier public
-
-php bin/console assets:install
+# Other useful commands
 
 ## Docker 
 
-### Commande pour accéder au shell du conteneur MySQL
+Container management commands
 
-docker exec –it db-mediatheque /bin/bash
+### Command to access MySQL container shell
 
-### Pour connaitre les processus running et exited
+``docker exec -it db-mediatheque /bin/bash``
 
-docker ps –a
+### To find out which processes are running and exited
 
-### Pour stopper un container running (celui s’éteint proprement)
+``docker ps -a``
 
-docker stop *container_id ou container_name*
+### To stop a running container (it shuts down cleanly)
 
-### Pour stopper un container running immédiatement
+``docker stop *container_id or container_name*``
 
-docker kill *container_id ou container_name*
+### To stop a running container immediately
 
-### Pour effacer un container stoppé
+``docker kill *container_id or container_name*``
 
-docker rm *container_id ou container_name*
+### To delete a stopped container
 
-### Restart un ou plusieurs containers
+``docker rm *container_id or container_name*``
 
-docker restart *container_id1 container_id2 ... ou container_name1 ...*
+### Restart one or more containers
 
-### Stat d'utilisation
+``docker restart *container_id1 container_id2 ... or container_name1 ...*``
+
+### Usage stat
 
 docker stat
 
-### Vérification de failles
+## Symfony 
 
-docker scan
+For the following commands, we'll assume you're in the /site folder of the php-mediatheque container. 
+
+### List available Symfony console commands
+
+``php bin/console list``
+
+### Retrieve the last database migration
+
+``php bin/console doctrine:migrations:latest``
+> Sample response DoctrineMigrations\Version20220211020200
+
+### Perform migration
+
+``php bin/console doctrine:migrations:migrate``
+
+### Perform a specific migration
+
+``php bin/console doctrine:migrations:migrate DoctrineMigrations\Version20220211020200``
+
+### View site routes
+
+``php bin/console debug:router``
+
+### Clear caches 
+
+``php bin/console cache:clear``
+
+### Install assets (images, css, javascript) in public folder
+
+``php bin/console assets:install``
+
+
