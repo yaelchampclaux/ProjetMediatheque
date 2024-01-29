@@ -16,7 +16,7 @@ This tp is designed to run in WSL (or linux or mac).
 ## Windows users (cmd, powershell)
 It can also be launched from a Windows command window (cmd) or a Powershell window.
 To do this (before running command 1. below), replace the Unix linefeeds (LF) with Windows linefeeds (CRLF) in the composer-setup.php file in the /php\ folder.
-This can be done with notepad++ via Edit / Convert line breaks / Covertir to Windows format (CR + LF), without forgetting to save the file.
+This can be done with notepad++ via Edit / Convert line breaks / Covert to Windows format (CR + LF), without forgetting to save the file.
 
 This avoids the error "=> ERROR [www 7/9] RUN php composer-setup.php" when launching containers.
 
@@ -53,11 +53,11 @@ docker exec -it php-mediatheque /bin/bash
 This loads the dependencies described in our composer.json file. 
 They are not in the git repository, as they can be generated with the previous command.
 
-3. Create the database by synchronizing (from /site in the php container) 
+3. Create the database into db-mediatheque container by synchronizing (from /site in the php container) 
 
 php bin/console doctrine:schema:update --force
 
-This generates the database in MySQL from our code (the Entity in the /src folder of our site).
+This generates the database into MySQL from our code (the Entities in the /src folder of our site).
 
 4. Add data to the media library (via PhpMyAdmin) 
 
