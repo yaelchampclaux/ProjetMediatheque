@@ -61,8 +61,8 @@ This generates the database into MySQL from our code (the Entities in the /src f
 
 4. Add data to the media library (via PhpMyAdmin) 
 
-Using your browser, go to phpMyAdmin http://localhost:8812/
-Then click on Import then Browse, then select the fill-mediatheque.sql file located in the /data folder of ProjetMediatheque.
+Using your browser, go to phpMyAdmin http://localhost:8812/\
+Then click on "mediatheque" database, then on "Import" then "Browse", then select the fill-mediatheque.sql file located in the /data folder of ProjetMediatheque.
 
 5. Test
 
