@@ -2,10 +2,29 @@
 
 {% block title %}Oeuvre index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+     <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "paging": true, // Enable pagination
+                "pageLength": 10 // Set the number of entries per page
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
     <h1>Oeuvre index</h1>
-
-    <table class="table">
+    
+    <table id="myTable" class="display">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,8 +42,8 @@
                 <td>{{ oeuvre.photo }}</td>
                 <td>{{ oeuvre.annee }}</td>
                 <td>
-                    <a href="{{ path('oeuvre_show', {'id': oeuvre.id}) }}">Voir</a>
-                    <a href="{{ path('oeuvre_edit', {'id': oeuvre.id}) }}">Editer</a>
+                    <a href="{{ path('oeuvre_show', {'id': oeuvre.id}) }}"  class="btn btn-primary">Voir</a>
+                    <a href="{{ path('oeuvre_edit', {'id': oeuvre.id}) }}"  class="btn btn-warning">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +54,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('oeuvre_new') }}">Nouveau</a>
 {% endblock %}
