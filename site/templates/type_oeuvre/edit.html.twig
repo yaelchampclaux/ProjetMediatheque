@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit TypeOeuvre{% endblock %}
+{% block title %}Éditer le type d'œuvre{% endblock %}
 
 {% block body %}
-    <h1>Edit TypeOeuvre</h1>
+    <h1>Éditer le type d'œuvre</h1>
 
-    {{ include('type_oeuvre/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('type_oeuvre/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('type_oeuvre_index') }}">back to list</a>
+    <a href="{{ path('type_oeuvre_index') }}">retour à la liste</a>
 
     {{ include('type_oeuvre/_delete_form.html.twig') }}
 {% endblock %}

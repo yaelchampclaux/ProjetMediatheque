@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Edition{% endblock %}
+{% block title %}Éditer Édition{% endblock %}
 
 {% block body %}
-    <h1>Edit Edition</h1>
+    <h1>Éditer Édition</h1>
 
-    {{ include('edition/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('edition/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('edition_index') }}">back to list</a>
+    <a href="{{ path('edition_index') }}">retour à la liste</a>
 
     {{ include('edition/_delete_form.html.twig') }}
 {% endblock %}
