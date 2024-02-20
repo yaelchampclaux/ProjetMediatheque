@@ -21,17 +21,17 @@
                 <td>{{ auteur.nomoupseudo }}</td>
                 <td>{{ auteur.prenom }}</td>
                 <td>
-                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}">show</a>
-                    <a href="{{ path('auteur_edit', {'id': auteur.id}) }}">edit</a>
+                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}">Voir</a>
+                    <a href="{{ path('auteur_edit', {'id': auteur.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">pas d’entrées trouvées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('auteur_new') }}">Create new</a>
+    <a href="{{ path('auteur_new') }}">Nouveau</a>
 {% endblock %}
