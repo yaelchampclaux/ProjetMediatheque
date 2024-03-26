@@ -1,4 +1,4 @@
-FROM php:8.0-cli
+FROM php:8.2.15-cli
 RUN useradd -ms /bin/bash you
 WORKDIR /home/you
 
